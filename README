@@ -1,0 +1,8 @@
+== PayPal Ruby SDK - Extended ==
+
+This is an extension of the Ruby SDK provided by PayPal.  The intention is to 
+make some of the function calls a little more object oriented, and a little
+less hash based.
+
+This will also be packaged as a gem instead of a Rails plugin (buried inside
+a Rails project...)
