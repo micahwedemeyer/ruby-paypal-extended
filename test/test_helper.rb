@@ -1,1 +1,2 @@
-require File.join(File.dirname(__FILE__), '..', 'lib', 'paypal-ruby-extended')
+require 'test/unit'
+require 'paypal-ruby-extended'
