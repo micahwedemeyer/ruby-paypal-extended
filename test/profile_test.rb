@@ -8,13 +8,18 @@ class ProfileTest < Test::Unit::TestCase
   end
   
   def test_constructor
-    @p = Profile.new(creds,
-      {"USE_PROXY" => true, "ADDRESS" => "foo", "PORT" => 99, "USER" => nil, "PASSWORD" => nil }
+    @p = Profile.new(
+      creds,
+      {"USE_PROXY" => true, "ADDRESS" => "foo", "PORT" => 99, "USER" => nil, "PASSWORD" => nil },
+      {"SERVER" => "bar", "SERVICE" => "/nvp/"},
+      {"VERSION" => "999", "SOURCE" => "PayPalRubySDKV1.2.0"}
     )
     
     assert @p.use_proxy?
     assert_equal 99, @p.proxy_info["PORT"]
     
+    assert_equal "bar", @p.endpoints["SERVER"]
+    assert_equal "999", @p.client_info["VERSION"]
   end
   
   protected
