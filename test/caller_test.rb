@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class CallerTest < Test::Unit::TestCase
-  include PayPalSDKProfiles
   include PayPalSDK
-  include PayPalSDKCallers
   
   def setup
     @p = Profile.new(creds)

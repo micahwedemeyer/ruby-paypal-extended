@@ -1,6 +1,6 @@
-# The module has a class which holds merchant's API credentials and PayPal endpoint information.  
-
-module PayPalSDKProfiles
+module PayPalSDK
+  
+  # This class holds a merchant's API crednetials and PayPal endpoint information
   class Profile
     
     attr_accessor :credentials

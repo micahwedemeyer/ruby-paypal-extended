@@ -4,9 +4,8 @@ require 'uri'
 require 'cgi'
 # The module has a class and a wrapper method wrapping NET:HTTP methods to simplify calling PayPal APIs.
 
-module PayPalSDKCallers   
-  class Caller    
-    include PayPalSDKProfiles
+module PayPalSDK   
+  class Caller
     attr_reader :ssl_strict
     
     # Headers for ?
@@ -14,7 +13,7 @@ module PayPalSDKCallers
     
     # Creates a new Caller object.
     #
-    # <tt>profile</tt> - A PayPalSDKProfiles::Profile object.
+    # <tt>profile</tt> - A PayPalSDK::Profile object.
     def initialize(profile, ssl_verify_mode=false)
       @ssl_strict = ssl_verify_mode  
         
