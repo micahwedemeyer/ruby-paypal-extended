@@ -48,7 +48,7 @@ module PayPalSDK
       http.use_ssl = true;        
     
       contents, unparseddata = http.post2(@ep["SERVICE"], req_data, @headers)    
-      data =CGI::parse(unparseddata)          
+      data = CGI::parse(unparseddata)          
       transaction = Transaction.new(data)         
     end
     

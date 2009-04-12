@@ -4,10 +4,12 @@ module PayPalSDK
     def initialize(data)
      @success = data["ACK"].to_s != "Failure"
      @response = data    
-   end
+    end
+    
     def success?
       @success
     end
+    
     def response
       @response
     end

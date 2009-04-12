@@ -1,3 +1,6 @@
+require 'paypal-ruby-extended/paypal_exception'
 require 'paypal-ruby-extended/profile'
 require 'paypal-ruby-extended/transaction'
 require 'paypal-ruby-extended/caller'
+require 'paypal-ruby-extended/operations/operation'
+require 'paypal-ruby-extended/operations/mass_pay'

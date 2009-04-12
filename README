@@ -6,3 +6,12 @@ less hash based.
 
 This will also be packaged as a gem instead of a Rails plugin (buried inside
 a Rails project...)
+
+== Testing ==
+There is minimal testing of the basic API functionality, because it came
+pre-written from PayPal, and I'm going to assume that PayPal put it together
+correctly.
+
+For new code (and refactoring) there are tests in the /test directory.  To run
+them, use rake:
+rake test
