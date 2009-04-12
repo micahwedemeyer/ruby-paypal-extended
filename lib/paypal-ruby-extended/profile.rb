@@ -1,13 +1,62 @@
 # The module has a class which holds merchant's API credentials and PayPal endpoint information.  
 
 module PayPalSDKProfiles
-  class Profile         
-    cattr_accessor :credentials 
-    cattr_accessor :endpoints 
-    cattr_accessor :client_info 
-    cattr_accessor :proxy_info 
-    cattr_accessor :PAYPAL_EC_URL 
-    cattr_accessor :DEV_CENTRAL_URL 
+  class Profile
+    
+    def self.credentials
+      @@credentials
+    end
+    
+    def self.credentials=(value)
+      @@credentials = value
+    end
+    
+    def self.endpoints
+      @@endpoints
+    end
+    
+    def self.endpoints=(value)
+      @@endpoints = value
+    end
+    
+    def self.client_info
+      @@client_info
+    end
+    
+    def self.client_info=(value)
+      @@client_info = value
+    end
+    
+    def self.proxy_info
+      @@proxy_info
+    end
+    
+    def self.proxy_info=(value)
+      @@proxy_info = value
+    end
+    
+    def self.PAYPAL_EC_URL
+      @@PAYPAL_EC_URL
+    end
+    
+    def self.PAYPAL_EC_URL=(value)
+      @@PAYPAL_EC_URL = value
+    end
+    
+    def self.DEV_CENTRAL_URL
+      @@DEV_CENTRAL_URL
+    end
+    
+    def self.DEV_CENTRAL_URL=(value)
+      @@DEV_CENTRAL_URL = value
+    end
+    
+#    cattr_accessor :credentials 
+#    cattr_accessor :endpoints 
+#    cattr_accessor :client_info 
+#    cattr_accessor :proxy_info 
+#    cattr_accessor :PAYPAL_EC_URL 
+#    cattr_accessor :DEV_CENTRAL_URL 
     
     
 # Redirect URL for Express Checkout 

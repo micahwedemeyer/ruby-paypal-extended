@@ -1,14 +1,14 @@
 require 'net/http'
 require 'net/https'
 require 'uri'
-require 'profile'
-require 'utils'
+
+#require 'utils'
 # The module has a class and a wrapper method wrapping NET:HTTP methods to simplify calling PayPal APIs.
 
 module PayPalSDKCallers   
   class Caller    
     include PayPalSDKProfiles
-    include PayPalSDKUtils
+    #include PayPalSDKUtils
     attr_reader :ssl_strict
     # to make long names shorter for easier access and to improve readability define the following variables
     @@profile = PayPalSDKProfiles::Profile
@@ -20,7 +20,7 @@ module PayPalSDKCallers
     @@ci=@@profile.client_info
     # endpoints of PayPal hash
     @@ep=@@profile.endpoints     
-    @@PayPalLog=PayPalSDKUtils::Logger.getLogger('PayPal.log')    
+#    @@PayPalLog=PayPalSDKUtils::Logger.getLogger('PayPal.log')    
     # CTOR
     def initialize(ssl_verify_mode=false)
       @ssl_strict = ssl_verify_mode  
@@ -52,9 +52,9 @@ module PayPalSDKCallers
       http.use_ssl = true;        
     
       maskedrequest = mask_data(req_data)
-      @@PayPalLog.info "Sent: #{maskedrequest}"  
+#      @@PayPalLog.info "Sent: #{maskedrequest}"  
       contents, unparseddata = http.post2(@@ep["SERVICE"], req_data, @@headers)    
-      @@PayPalLog.info "Received: #{CGI.unescape(unparseddata)}"
+#      @@PayPalLog.info "Received: #{CGI.unescape(unparseddata)}"
       data =CGI::parse(unparseddata)          
       transaction = Transaction.new(data)         
     end    
