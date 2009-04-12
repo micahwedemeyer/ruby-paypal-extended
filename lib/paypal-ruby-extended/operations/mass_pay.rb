@@ -16,6 +16,17 @@ module PayPalSDK
       attr_accessor :unique_ids
       attr_accessor :notes
       
+      # Creates a new MassPay operation.
+      #
+      # <tt>receiver_identifiers</tt> - An array of identifiers for the receivers, either
+      #  email addresses or paypal IDs.  As specified in the docs, they must all be
+      #  one or the other.
+      # <tt>amounts</tt> - An array of numeric values representing the amounts to send to each recipient.
+      # <tt>receiver_type</tt> - Must be either "UserID" or "EmailAddress"
+      # <tt>currency_code</tt> - The 3 letter currency code
+      # <tt>email_subect</tt> - Subject of the email that will be sent to everyone
+      # <tt>unique_ids</tt> - An array of unique identifiers to attach to each transaction.  Optional
+      # <tt>notes</tt> - An array of notes to attach to each transaction. Optional
       def initialize(
         receiver_identifiers,
         amounts,
