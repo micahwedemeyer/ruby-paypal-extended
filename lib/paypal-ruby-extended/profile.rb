@@ -25,10 +25,10 @@ module PayPalSDK
     end
     
     # Proxy information of the client environment.
-    DEFAULT_PROXY_INFO = {"USE_PROXY" => false, "ADDRESS" => nil, "PORT" => nil, "USER" => nil, "PASSWORD" => nil },
+    DEFAULT_PROXY_INFO = {"USE_PROXY" => false, "ADDRESS" => nil, "PORT" => nil, "USER" => nil, "PASSWORD" => nil }
         
     # Information needed for tracking purposes.
-    DEFAULT_CLIENT_INFO = { "VERSION" => "56.0", "SOURCE" => "PayPalRubySDKV1.2.0"},
+    DEFAULT_CLIENT_INFO = { "VERSION" => "56.0", "SOURCE" => "PayPalRubySDKV1.2.0"}
         
     # endpoint of PayPal server against which call will be made.
     DEFAULT_ENDPOINTS = {"SERVER" => "api-3t.sandbox.paypal.com", "SERVICE" => "/nvp/"}
