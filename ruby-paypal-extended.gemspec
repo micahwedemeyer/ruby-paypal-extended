@@ -2,7 +2,7 @@ require 'rake'
 
 Gem::Specification.new do |s|
   s.name = "ruby-paypal-extended"
-  s.version = "0.2"
+  s.version = "0.3"
   s.authors = ["Micah Wedemeyer"]
   s.date = "2009-05-10"
   s.summary = "A library for interfacing with PayPal." 
