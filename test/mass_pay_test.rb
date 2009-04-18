@@ -5,14 +5,13 @@ class MassPayTest < Test::Unit::TestCase
   include PayPalSDK::Operations
   
   def setup
-    @mp = MassPay.new(*mass_pay_args)
+    @mp = MassPay.new(mass_pay_opts)
   end
   
   def test_constructor_wrong_arity
     assert_raise MassPayArityException do
-      args = mass_pay_args
-      args[5] = ["a", "b"] # Missing a unique identifier
-      MassPay.new(*args)
+      opts = mass_pay_opts(:unique_ids => ["a","b"]) # Missing a unique identifier
+      MassPay.new(opts)
     end
   end
   
@@ -35,10 +34,11 @@ class MassPayTest < Test::Unit::TestCase
   end
   
   def test_call_hash_email
-    args = mass_pay_args
-    args[0] = ["a@b.com", "a@c.com", "a@d.com"]
-    args[2] = "EmailAddress"
-    mp = MassPay.new(*args)
+    opts = mass_pay_opts(
+      :receiver_identifiers => ["a@b.com", "a@c.com", "a@d.com"],
+      :receiver_type => "EmailAddress"
+    )
+    mp = MassPay.new(opts)
     
     h = mp.send(:call_hash)
     
@@ -51,16 +51,14 @@ class MassPayTest < Test::Unit::TestCase
   
   protected
   
-  def mass_pay_args
-    [
-      ["1", "2", "3"],
-      [1.00, 5.00, 10.00],
-      "UserID",
-      "USD",
-      nil,
-      ["a", "b", "c"],
-      nil
-    ]
+  def mass_pay_opts(opts = {})
+    {
+      :receiver_identifiers => ["1", "2", "3"],
+      :receiver_type => "UserID",
+      :amounts => [1.00, 5.00, 10.00],
+      :currency_code => "USD",
+      :unique_ids => ["a", "b", "c"]
+    }.merge(opts)
   end
   
 end

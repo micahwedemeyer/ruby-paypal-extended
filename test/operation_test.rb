@@ -5,7 +5,7 @@ class OperationTest < Test::Unit::TestCase
     @mock_caller = flexmock(:caller)
     
     # We'll use the MassPay operation
-    @op = MassPay.new(*mass_pay_args)
+    @op = MassPay.new(mass_pay_opts)
   end
   
   def test_call
@@ -17,15 +17,13 @@ class OperationTest < Test::Unit::TestCase
   
   protected
   
-  def mass_pay_args
-    [
-      ["1", "2", "3"],
-      [1.00, 5.00, 10.00],
-      "UserID",
-      "USD",
-      nil,
-      ["a", "b", "c"],
-      nil
-    ]
+  def mass_pay_opts(opts = {})
+    {
+      :receiver_identifiers => ["1", "2", "3"],
+      :receiver_type => "UserID",
+      :amounts => [1.00, 5.00, 10.00],
+      :currency_code => "USD",
+      :unique_ids => ["a", "b", "c"]
+    }.merge(opts)
   end
 end

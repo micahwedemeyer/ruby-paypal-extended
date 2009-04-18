@@ -22,27 +22,24 @@ module PayPalSDK
       #  email addresses or paypal IDs.  As specified in the docs, they must all be
       #  one or the other.
       # <tt>amounts</tt> - An array of numeric values representing the amounts to send to each recipient.
-      # <tt>receiver_type</tt> - Must be either "UserID" or "EmailAddress"
+      # <tt>receiver_type</tt> - Must be either "UserID" or "EmailAddress".  Defaults to EmailAddress
       # <tt>currency_code</tt> - The 3 letter currency code
       # <tt>email_subect</tt> - Subject of the email that will be sent to everyone
       # <tt>unique_ids</tt> - An array of unique identifiers to attach to each transaction.  Optional
       # <tt>notes</tt> - An array of notes to attach to each transaction. Optional
-      def initialize(
-        receiver_identifiers,
-        amounts,
-        receiver_type = "EmailAddress",
-        currency_code = "USD",
-        email_subject = nil,
-        unique_ids = nil,
-        notes = nil
-      )
-        @receiver_identifiers = receiver_identifiers
-        @amounts = amounts
-        @receiver_type = receiver_type
-        @currency_code = currency_code
-        @email_subject = email_subject
-        @unique_ids = unique_ids
-        @notes = notes
+      def initialize(opts)
+        opts = {
+          :receiver_type => "EmailAddress",
+          :currency_code => "USD"
+        }.merge(opts)
+      
+        @receiver_identifiers = opts[:receiver_identifiers]
+        @amounts = opts[:amounts]
+        @receiver_type = opts[:receiver_type]
+        @currency_code = opts[:currency_code]
+        @email_subject = opts[:email_subject]
+        @unique_ids = opts[:unique_ids]
+        @notes = opts[:notes]
         
         @n_recip = @receiver_identifiers.size
         check_arity
