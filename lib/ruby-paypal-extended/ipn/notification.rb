@@ -157,7 +157,7 @@ module PayPalSDK
       def acknowledge      
         payload = raw
         
-        uri = URI.parse(self.class.ipn_url)
+        uri = URI.parse(self.ipn_url)
         request_path = "#{uri.path}?cmd=_notify-validate"
         
         request = Net::HTTP::Post.new(request_path)
@@ -168,13 +168,13 @@ module PayPalSDK
   
         if uri.scheme == "https"
           http.use_ssl = true
-          if self.class.ca_cert_file
+          # http://www.ruby-lang.org/en/news/2007/10/04/net-https-vulnerability/
+          if http.respond_to?(:enable_post_connection_check)
             http.verify_mode = OpenSSL::SSL::VERIFY_PEER
-            if http.respond_to?(:enable_post_connection_check)
-              # http://www.ruby-lang.org/en/news/2007/10/04/net-https-vulnerability/
-              http.enable_post_connection_check = true
-            end
-            http.ca_file = self.class.ca_cert_file
+            http.enable_post_connection_check = true
+            store = OpenSSL::X509::Store.new
+            store.set_default_paths
+            http.cert_store = store
           else
             http.verify_mode = OpenSSL::SSL::VERIFY_NONE
           end
