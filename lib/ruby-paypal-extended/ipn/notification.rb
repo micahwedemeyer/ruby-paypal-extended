@@ -73,10 +73,6 @@ module PayPalSDK
     #     end
     #   end
     class Notification
-      # The URL to the sandbox IPN endpoint
-      SANDBOX_IPN_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr'
-      PRODUCTION_IPN_URL = 'https://www.paypal.com/cgi-bin/webscr'
-      
       # The IPN URL to connect to.  Defaults to production
       attr_accessor :ipn_url
       
@@ -96,7 +92,7 @@ module PayPalSDK
       #     ...
       #   end
       def initialize(post, use_production = false)
-        @ipn_url = use_production ? PRODUCTION_IPN_URL : SANDBOX_IPN_URL
+        @ipn_url = use_production ? PayPalSDK::Config::PRODUCTION_IPN_URL : PayPalSDK::Config::SANDBOX_IPN_URL
         empty!
         parse(post)
       end

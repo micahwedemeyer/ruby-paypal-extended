@@ -8,51 +8,24 @@ module PayPalSDK
     attr_accessor :client_info
     attr_accessor :proxy_info
     
-    def self.PAYPAL_EC_URL
-      @@PAYPAL_EC_URL
-    end
-    
-    def self.PAYPAL_EC_URL=(value)
-      @@PAYPAL_EC_URL = value
-    end
-    
-    def self.DEV_CENTRAL_URL
-      @@DEV_CENTRAL_URL
-    end
-    
-    def self.DEV_CENTRAL_URL=(value)
-      @@DEV_CENTRAL_URL = value
-    end
-    
     # Proxy information of the client environment.
     DEFAULT_PROXY_INFO = {"USE_PROXY" => false, "ADDRESS" => nil, "PORT" => nil, "USER" => nil, "PASSWORD" => nil }
-        
-    # Information needed for tracking purposes.
-    DEFAULT_CLIENT_INFO = { "VERSION" => "56.0", "SOURCE" => "PayPalRubySDKV1.2.0"}
-        
-    # endpoint of PayPal server against which call will be made.
-    DEFAULT_ENDPOINTS = {"SERVER" => "api-3t.sandbox.paypal.com", "SERVICE" => "/nvp/"}
-    
-    
-    # Redirect URL for Express Checkout 
-    @@PAYPAL_EC_URL="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token="
-    #    
-    @@DEV_CENTRAL_URL="https://developer.paypal.com"
      
     # Creates a new Profile, setting it with the options provided
     # Options are:
-    # <tt>proxy_info</tt>
-    # <tt>client_info</tt>
-    # ...
-    ###############################################################################################################################    
-    #    NOTE: Production code should NEVER expose API credentials in any way! They must be managed securely in your application.
-    #    To generate a Sandbox API Certificate, follow these steps: https://www.paypal.com/IntegrationCenter/ic_certificate.html
-    ###############################################################################################################################
-    def initialize(credentials, proxy_info = nil, endpoints = nil, client_info = nil)
+    # <tt>credentials</tt> - A hash of user credentials with keys of "USER", "PWD", and "SIGNATURE"
+    # <tt>use_production</tt> - Set to true to interact with the production server. Defaults to false
+    # <tt>proxy_info</tt> - A hash of proxy server info with keys of "USE_PROXY", "ADDRESS", "PORT", "USER", "PASSWORD"
+    def initialize(credentials, use_production = false, proxy_info = nil)
       @credentials = credentials
       @proxy_info = proxy_info || DEFAULT_PROXY_INFO
-      @endpoints = endpoints || DEFAULT_ENDPOINTS 
-      @client_info = client_info || DEFAULT_CLIENT_INFO
+      
+      @endpoints = use_production ? PayPalSDK::Config::PRODUCTION_API_ENDPOINT : PayPalSDK::Config::SANDBOX_API_ENDPOINT
+      
+      @client_info = {
+        "VERSION" => PayPalSDK::Config::CLIENT_VERSION,
+        "SOURCE" => PayPalSDK::Config::CLIENT_SOURCE
+      }
     end
     
     def use_proxy?
