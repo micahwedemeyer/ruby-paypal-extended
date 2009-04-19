@@ -20,7 +20,7 @@ class MassPayTest < Test::Unit::TestCase
     assert_equal "MassPay", h[:method]
     
     assert_equal "USD", h[:currency_code]
-    assert_equal "UserID", h[:receiver_type]
+    assert_equal "UserID", h[:receivertype]
     
     assert_equal "1", h[:l_receiverid0]
     assert_equal 1.00, h[:l_amt0]
@@ -36,13 +36,13 @@ class MassPayTest < Test::Unit::TestCase
   def test_call_hash_email
     opts = mass_pay_opts(
       :receiver_identifiers => ["a@b.com", "a@c.com", "a@d.com"],
-      :receiver_type => "EmailAddress"
+      :receivertype => "EmailAddress"
     )
     mp = MassPay.new(opts)
     
     h = mp.send(:call_hash)
     
-    assert_equal "EmailAddress", h[:receiver_type]
+    assert_equal "EmailAddress", h[:receivertype]
     assert_equal "a@b.com", h[:l_email0]
     assert_equal "a@d.com", h[:l_email2]
     
@@ -54,7 +54,7 @@ class MassPayTest < Test::Unit::TestCase
   def mass_pay_opts(opts = {})
     {
       :receiver_identifiers => ["1", "2", "3"],
-      :receiver_type => "UserID",
+      :receivertype => "UserID",
       :amounts => [1.00, 5.00, 10.00],
       :currency_code => "USD",
       :unique_ids => ["a", "b", "c"]

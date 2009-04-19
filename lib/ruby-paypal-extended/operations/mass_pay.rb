@@ -10,7 +10,7 @@ module PayPalSDK
     class MassPay < Operation
       attr_accessor :receiver_identifiers
       attr_accessor :amounts
-      attr_accessor :receiver_type
+      attr_accessor :receivertype
       attr_accessor :currency_code
       attr_accessor :email_subject
       attr_accessor :unique_ids
@@ -22,20 +22,20 @@ module PayPalSDK
       #  email addresses or paypal IDs.  As specified in the docs, they must all be
       #  one or the other.
       # <tt>amounts</tt> - An array of numeric values representing the amounts to send to each recipient.
-      # <tt>receiver_type</tt> - Must be either "UserID" or "EmailAddress".  Defaults to EmailAddress
+      # <tt>receivertype</tt> - Must be either "UserID" or "EmailAddress".  Defaults to EmailAddress
       # <tt>currency_code</tt> - The 3 letter currency code
       # <tt>email_subect</tt> - Subject of the email that will be sent to everyone
       # <tt>unique_ids</tt> - An array of unique identifiers to attach to each transaction.  Optional
       # <tt>notes</tt> - An array of notes to attach to each transaction. Optional
       def initialize(opts)
         opts = {
-          :receiver_type => "EmailAddress",
+          :receivertype => "EmailAddress",
           :currency_code => "USD"
         }.merge(opts)
       
         @receiver_identifiers = opts[:receiver_identifiers]
         @amounts = opts[:amounts]
-        @receiver_type = opts[:receiver_type]
+        @receivertype = opts[:receivertype]
         @currency_code = opts[:currency_code]
         @email_subject = opts[:email_subject]
         @unique_ids = opts[:unique_ids]
@@ -53,12 +53,12 @@ module PayPalSDK
         
         h = {
           :method => "MassPay",
-          :receiver_type => @receiver_type,
+          :receivertype => @receivertype,
           :currency_code => @currency_code,
           :email_subject => @email_subject
         }
         
-        id_key = @receiver_type == "UserID" ? "l_receiverid" : "l_email"
+        id_key = @receivertype == "UserID" ? "l_receiverid" : "l_email"
         
         @receiver_identifiers.each_index do |i|
           h["#{id_key}#{i}".to_sym] = @receiver_identifiers[i]
