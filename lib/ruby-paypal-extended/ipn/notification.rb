@@ -73,8 +73,6 @@ module PayPalSDK
     #     end
     #   end
     class Notification
-      CA_CERT_FILE = File.expand_path(File.join(File.dirname(__FILE__), "..", "..", "..", "misc", "verisign.pem"))
-      
       # The URL to the sandbox IPN endpoint
       SANDBOX_IPN_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr'
       PRODUCTION_IPN_URL = 'https://www.paypal.com/cgi-bin/webscr'
@@ -87,8 +85,6 @@ module PayPalSDK
       
       # The raw Paypal IPN data that was received.
       attr_accessor :raw
-      
-      @@ca_cert_file = CA_CERT_FILE
   
       # Creates a new Paypal::Notification object. As the first argument,
       # pass the raw POST data that you've received from Paypal.
