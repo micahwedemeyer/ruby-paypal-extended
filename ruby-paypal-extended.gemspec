@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'rake'
 
 Gem::Specification.new do |s|
